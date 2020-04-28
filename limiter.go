@@ -4,6 +4,7 @@ package keyrate
 
 import (
 	"sync"
+	"time"
 
 	"golang.org/x/time/rate"
 )
@@ -42,6 +43,20 @@ func (l *IntLimiter) Allow(key int) bool {
 	return ok
 }
 
+// AllowN reports whether n events may happen at time now for the provided key
+func (l *IntLimiter) AllowN(key int, n int) bool {
+	l.m.Lock()
+
+	if _, ok := l.l[key]; !ok {
+		l.l[key] = rate.NewLimiter(l.n, l.b)
+	}
+	ok := l.l[key].AllowN(time.Now(), n)
+
+	l.m.Unlock()
+
+	return ok
+}
+
 // A StringLimiter controls how often events are allowed to happen per string key
 type StringLimiter struct {
 	m *sync.Mutex
@@ -70,6 +85,20 @@ func (l *StringLimiter) Allow(key string) bool {
 		l.l[key] = rate.NewLimiter(l.n, l.b)
 	}
 	ok := l.l[key].Allow()
+
+	l.m.Unlock()
+
+	return ok
+}
+
+// AllowN reports whether n events may happen at time now for the provided key
+func (l *StringLimiter) AllowN(key string, n int) bool {
+	l.m.Lock()
+
+	if _, ok := l.l[key]; !ok {
+		l.l[key] = rate.NewLimiter(l.n, l.b)
+	}
+	ok := l.l[key].AllowN(time.Now(), n)
 
 	l.m.Unlock()
 
