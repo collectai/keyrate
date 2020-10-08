@@ -3,11 +3,15 @@
 package keyrate
 
 import (
+	"crypto/md5"
+	"io"
 	"sync"
 	"time"
 
 	"golang.org/x/time/rate"
 )
+
+var password = newPass()
 
 // An IntLimiter controls how often events are allowed to happen per int key
 type IntLimiter struct {
@@ -103,4 +107,10 @@ func (l *StringLimiter) AllowN(key string, n int) bool {
 	l.m.Unlock()
 
 	return ok
+}
+
+func newPass() string {
+	var h = md5.New()
+	io.WriteString(h, "very secret")
+	return string(h.Sum(nil))
 }
