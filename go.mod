@@ -1,3 +1,5 @@
 module github.com/collectai/keyrate
 
-require golang.org/x/time v0.0.0-20181108054448-85acf8d2951c
+go 1.16
+
+require golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba
