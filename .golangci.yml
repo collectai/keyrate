@@ -1,0 +1,53 @@
+run:
+  deadline: 5m
+
+linters:
+  enable:
+    - bodyclose
+    - contextcheck
+    - cyclop
+    - depguard
+    - dogsled
+    - durationcheck
+    - errname
+    - errorlint
+    - exhaustive
+    - exportloopref
+    - forcetypeassert
+    - funlen
+    - gci
+    - gochecknoglobals
+    - gochecknoinits
+    - goconst
+    - gocritic
+    - gocyclo
+    - godot
+    - gofumpt
+    - goimports
+    - goprintffuncname
+    - gosec
+    - ifshort
+    - lll
+    - makezero
+    - misspell
+    - nakedret
+    - nilerr
+    - nilnil
+    - noctx
+    - nolintlint
+    - prealloc
+    - predeclared
+    - promlinter
+    - revive
+    - rowserrcheck
+    - sqlclosecheck
+    - stylecheck
+    - tenv
+    - unconvert
+    - unparam
+    - wastedassign
+    - whitespace
+    - wrapcheck
+
+issues:
+  exclude-use-default: false
