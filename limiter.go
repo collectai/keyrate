@@ -1,5 +1,5 @@
 // Package keyrate wraps Limiter from golang.org/x/time/rate
-// to perform key based limiting
+// to perform key based limiting.
 package keyrate
 
 import (
@@ -9,7 +9,7 @@ import (
 	"golang.org/x/time/rate"
 )
 
-// An IntLimiter controls how often events are allowed to happen per int key
+// An IntLimiter controls how often events are allowed to happen per int key.
 type IntLimiter struct {
 	m *sync.Mutex
 	l map[int]*rate.Limiter
@@ -18,7 +18,7 @@ type IntLimiter struct {
 	b int
 }
 
-// NewIntLimiter returns a new IntLimiter with up to rate r and burts of at most b
+// NewIntLimiter returns a new IntLimiter with up to rate r and burts of at most b.
 func NewIntLimiter(n rate.Limit, b int) *IntLimiter {
 	return &IntLimiter{
 		m: &sync.Mutex{},
@@ -29,7 +29,7 @@ func NewIntLimiter(n rate.Limit, b int) *IntLimiter {
 	}
 }
 
-// Allow reports whether one event may happen at time now for the provided key
+// Allow reports whether one event may happen at time now for the provided key.
 func (l *IntLimiter) Allow(key int) bool {
 	l.m.Lock()
 
@@ -43,7 +43,7 @@ func (l *IntLimiter) Allow(key int) bool {
 	return ok
 }
 
-// AllowN reports whether n events may happen at time now for the provided key
+// AllowN reports whether n events may happen at time now for the provided key.
 func (l *IntLimiter) AllowN(key int, n int) bool {
 	l.m.Lock()
 
@@ -57,7 +57,7 @@ func (l *IntLimiter) AllowN(key int, n int) bool {
 	return ok
 }
 
-// A StringLimiter controls how often events are allowed to happen per string key
+// A StringLimiter controls how often events are allowed to happen per string key.
 type StringLimiter struct {
 	m *sync.Mutex
 	l map[string]*rate.Limiter
@@ -66,7 +66,7 @@ type StringLimiter struct {
 	b int
 }
 
-// NewStringLimiter returns a new StringLimiter with up to rate r and burts of at most b
+// NewStringLimiter returns a new StringLimiter with up to rate r and burts of at most b.
 func NewStringLimiter(n rate.Limit, b int) *StringLimiter {
 	return &StringLimiter{
 		m: &sync.Mutex{},
@@ -77,7 +77,7 @@ func NewStringLimiter(n rate.Limit, b int) *StringLimiter {
 	}
 }
 
-// Allow reports whether one event may happen at time now for the provided key
+// Allow reports whether one event may happen at time now for the provided key.
 func (l *StringLimiter) Allow(key string) bool {
 	l.m.Lock()
 
@@ -91,7 +91,7 @@ func (l *StringLimiter) Allow(key string) bool {
 	return ok
 }
 
-// AllowN reports whether n events may happen at time now for the provided key
+// AllowN reports whether n events may happen at time now for the provided key.
 func (l *StringLimiter) AllowN(key string, n int) bool {
 	l.m.Lock()
 
